@@ -1,0 +1,67 @@
+#Add a new linux user
+sudo useradd anusree
+
+#How to set password to anusree(user)
+sudo passwd anusree
+
+#Add new linux group
+sudo groupadd college
+
+#Add new user to an existing group
+sudo useradd -G college students
+
+#Add an existing user to an existing group
+sudo adduser anusree college
+
+#To see all user in your system
+cat /etc/passwd
+
+#Find a specified user / to check whether the user named "anusree" exist or not
+cat /etc/passwd | grep anusree
+
+#To see all group in your system
+cat /etc/group
+
+#To see all user in a group named "college "
+cat /etc/group | grep college
+
+--------------------------------------------------------------------------------------------------------------------
+
+Understanding fields in /etc/passwd
+
+The /etc/passwd contains one entry per line for each user (or user account) of the system. All fields are separated by a colon (:) symbol. Total seven fields as follows.
+
+Generally, passwd file entry looks as follows (click to enlarge image):
+
+
+(Fig.01: /etc/passwd file format - click to enlarge)
+
+Username: It is used when user logs in. It should be between 1 and 32 characters in length.
+Password: An x character indicates that encrypted password is stored in /etc/shadow file.
+User ID (UID): Each user must be assigned a user ID (UID). UID 0 (zero) is reserved for root and UIDs 1-99 are reserved for other predefined accounts. Further UID 100-999 are reserved by system for administrative and system accounts/groups.
+Group ID (GID): The primary group ID (stored in /etc/group file)
+User ID Info: The comment field. It allow you to add extra information about the users such as user's full name, phone number etc. This field use by finger command.
+Home directory: The absolute path to the directory the user will be in when they log in. If this directory does not exists then users directory becomes /
+Command/shell: The absolute path of a command or shell (/bin/bash). Typically, this is a shell. Please note that it does not have to be a shell.
+
+
+------------------------------------------------------------------------------------------------------------------
+
+
+Understanding fields in /etc/group file
+
+It stores group information or defines the user groups i.e. it defines the groups to which users belong. There is one entry per line, and each line has the following format (all fields are separated by a colon (:)
+
+cdrom:x:24:vivek,student13,raj
+_____ _  _      _____
+|    |  |        |
+|    |  |        |
+1    2  3        4
+Where,
+
+group_name: It is the name of group. If you run ls -l command, you will see this name printed in the group field.
+Password: Generally password is not used, hence it is empty/blank. It can store encrypted password. This is useful to implement privileged groups.
+Group ID (GID): Each user must be assigned a group ID. You can see this number in your /etc/passwd file.
+Group List: It is a list of user names of users who are members of the group. The user names, must be separated by commas.
+
+
